@@ -145,6 +145,25 @@ def main():
             pan_angle -= CAMERA_STEP
             if pan_angle < PAN_ANGLE_MIN:
                 pan_angle = PAN_ANGLE_MIN
+        # else:
+        #     if front_wheels_enable:
+        #         fw.turn(fw_angle)
+        #     if rear_wheels_enable:
+        #         bw.speed = motor_speed
+        #         bw.forward()
+                
+        if pan_tilt_enable:
+            pan_servo.write(pan_angle)
+            tilt_servo.write(tilt_angle)
+        sleep(0.01)
+        fw_angle = 180 - pan_angle
+        if fw_angle < FW_ANGLE_MIN or fw_angle > FW_ANGLE_MAX:
+            fw_angle = ((180 - fw_angle) - 90)/2 + 90
+            if front_wheels_enable:
+                fw.turn(fw_angle)
+            if rear_wheels_enable:
+                bw.speed = motor_speed
+                bw.backward()
         else:
             if front_wheels_enable:
                 fw.turn(fw_angle)
