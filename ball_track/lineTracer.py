@@ -99,7 +99,7 @@ def main():
 
     while True:
         try:
-            ret, frame = img.read()
+            _, frame = img.read()
             #frame의 특정 위치의 장만면 저장한다.
             roi2 = frame[90:120, 0:160]
             roi3 = frame[60:90, 0:160]
