@@ -32,8 +32,10 @@ else:
     
 SCREEN_WIDTH = 160
 SCREEN_HIGHT = 120
-img.set(3,SCREEN_WIDTH)
-img.set(4,SCREEN_HIGHT)
+# img.set(3,SCREEN_WIDTH)
+# img.set(4,SCREEN_HIGHT)
+img.set(cv2.CAP_PROP_FRAME_WIDTH,SCREEN_WIDTH)
+img.set(cv2.CAP_PROP_FRAME_HEIGHT,SCREEN_HIGHT)
 CENTER_X = SCREEN_WIDTH/2
 CENTER_Y = SCREEN_HIGHT/2
 BALL_SIZE_MIN = SCREEN_HIGHT/10
@@ -99,10 +101,10 @@ def main():
         try:
             ret, frame = img.read()
             #frame의 특정 위치의 장만면 저장한다.
-            roi2 = frame[360:480, 0:640]
-            roi3 = frame[240:360, 0:640]
-            roi4 = frame[120:240, 0:640]
-            roi5 = frame[0:120, 0:640]
+            roi2 = frame[90:120, 0:160]
+            roi3 = frame[60:90, 0:160]
+            roi4 = frame[30:60, 0:160]
+            roi5 = frame[0:30, 0:160]
         except Exception as e:
             print(e)
             continue
