@@ -20,7 +20,6 @@ def frame_set(contours,roi):
                 print("Turn Right")
     return x, y, 1
 
-    return 0,0,0
 
 
 if __name__ == "__main__":
