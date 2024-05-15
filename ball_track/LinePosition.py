@@ -18,7 +18,8 @@ def frame_set(contours,roi):
                 return x, y, 0
             if x <= 40:
                 print("Turn Right")
-    return x, y, 1
+                return x, y, 1
+    return 0,0,0
 
 
 
