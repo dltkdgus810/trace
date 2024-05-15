@@ -32,12 +32,16 @@ high_b = np.uint8([0,0,0])
 
 while True:
     #카메라에서 한장면을 뽑아 frame에 저장한다.
-    ret, frame = capture.read()
-    #frame의 특정 위치의 장만면 저장한다.
-    roi2 = frame[360:480, 0:640]
-    roi3 = frame[240:360, 0:640]
-    roi4 = frame[120:240, 0:640]
-    roi5 = frame[0:120, 0:640]
+    try:
+        ret, frame = capture.read()
+        #frame의 특정 위치의 장만면 저장한다.
+        roi2 = frame[360:480, 0:640]
+        roi3 = frame[240:360, 0:640]
+        roi4 = frame[120:240, 0:640]
+        roi5 = frame[0:120, 0:640]
+    except Exception as e:
+        print(e)
+        continue
     #frame(roi)에서 검정색을 찾아서 검정을 흰색으로 바꾸고 나머지는 검정색으로 만들기
     mask2 = cv2.inRange(roi2,high_b,low_b)
     mask3 = cv2.inRange(roi3,high_b,low_b)
