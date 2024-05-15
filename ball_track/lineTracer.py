@@ -71,17 +71,17 @@ SCAN_POS = [[20, TILT_ANGLE_MIN], [50, TILT_ANGLE_MIN], [90, TILT_ANGLE_MIN], [1
 
 bw = back_wheels.Back_Wheels()
 fw = front_wheels.Front_Wheels()
-pan_servo = Servo.Servo(1)
-tilt_servo = Servo.Servo(2)
+#pan_servo = Servo.Servo(1)
+tilt_servo = Servo.Servo(0)
 picar.setup()
 
 fw.offset = 0
-pan_servo.offset = 10
+#pan_servo.offset = 10
 tilt_servo.offset = 0
 
 bw.speed = 0
 fw.turn(90)
-pan_servo.write(90)
+#an_servo.write(90)
 tilt_servo.write(90)
 
 motor_speed = 60
@@ -138,38 +138,23 @@ def main():
                 continue
             
         if direction_flag ==1:
-            tilt_angle += CAMERA_STEP
-            if tilt_angle > PAN_ANGLE_MAX:
-                tilt_angle = PAN_ANGLE_MAX
+            fw_angle = 120 # change plz
+            if front_wheels_enable:
+                 fw.turn(fw_angle)
         elif direction_flag == -1:
-            tilt_angle -= CAMERA_STEP
-            if tilt_angle < PAN_ANGLE_MIN:
-                tilt_angle = PAN_ANGLE_MIN
-        # else:
-        #     if front_wheels_enable:
-        #         fw.turn(fw_angle)
-        #     if rear_wheels_enable:
-        #         bw.speed = motor_speed
-        #         bw.forward()
-                
-        if pan_tilt_enable:
-            tilt_servo.write(tilt_angle)
-        sleep(0.01)
-        fw_angle = 180 - tilt_angle
-        if fw_angle < FW_ANGLE_MIN or fw_angle > FW_ANGLE_MAX:
-            fw_angle = ((180 - fw_angle) - 90)/2 + 90
+            fw_angle = 60 # change plz
             if front_wheels_enable:
-                fw.turn(fw_angle)
-            if rear_wheels_enable:
-                bw.speed = motor_speed
-                bw.backward()
+                 fw.turn(fw_angle)
         else:
-            if front_wheels_enable:
-                fw.turn(fw_angle)
+            fw_angle = 90 # change plz
             if rear_wheels_enable:
                 bw.speed = motor_speed
                 bw.forward()
-        
+                
+        sleep(0.01)
+
+        if cv2.waitKey(1) & 0xff == ord('q'):
+            break
         
 if __name__ == "__main__":
     main()
