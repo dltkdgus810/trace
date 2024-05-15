@@ -10,15 +10,16 @@ def frame_set(contours,roi):
             x = int(M2['m10']/M2['m00'])
             y = int(M2['m01']/M2['m00'])    
             print("CX : "+str(x)+" CY : "+str(y))
-            if x >= 400:
+            if x >= 100:
                 print("Turn Left")
                 return x, y, -1
-            if x < 400 and x > 200:
+            if x < 100 and x > 40:
                 print("On Track")
                 return x, y, 0
-            if x <= 200:
+            if x <= 40:
                 print("Turn Right")
-                return x, y, 1
+    return x, y, 1
+
     return 0,0,0
 
 
@@ -37,10 +38,10 @@ if __name__ == "__main__":
         try:
             ret, frame = capture.read()
             #frame의 특정 위치의 장만면 저장한다.
-            roi2 = frame[90:120, 0:160]
-            roi3 = frame[60:90, 0:160]
-            roi4 = frame[30:60, 0:160]
-            roi5 = frame[0:30, 0:160]
+            roi2 = frame[360:480, 0:640]
+            roi3 = frame[240:360, 0:640]
+            roi4 = frame[120:240, 0:640]
+            roi5 = frame[0:120, 0:640]
         except Exception as e:
             print(e)
             continue
