@@ -87,7 +87,7 @@ tilt_servo.write(90)
 motor_speed = 60
 
 def main():
-    pan_angle = 90              # initial angle for pan
+    tilt_angle = 90              # initial angle for pan
     tilt_angle = 90             # initial angle for tilt
     fw_angle = 90
 
@@ -138,13 +138,13 @@ def main():
                 continue
             
         if direction_flag ==1:
-            pan_angle += CAMERA_STEP
-            if pan_angle > PAN_ANGLE_MAX:
-                pan_angle = PAN_ANGLE_MAX
+            tilt_angle += CAMERA_STEP
+            if tilt_angle > PAN_ANGLE_MAX:
+                tilt_angle = PAN_ANGLE_MAX
         elif direction_flag == -1:
-            pan_angle -= CAMERA_STEP
-            if pan_angle < PAN_ANGLE_MIN:
-                pan_angle = PAN_ANGLE_MIN
+            tilt_angle -= CAMERA_STEP
+            if tilt_angle < PAN_ANGLE_MIN:
+                tilt_angle = PAN_ANGLE_MIN
         # else:
         #     if front_wheels_enable:
         #         fw.turn(fw_angle)
@@ -153,10 +153,9 @@ def main():
         #         bw.forward()
                 
         if pan_tilt_enable:
-            pan_servo.write(pan_angle)
             tilt_servo.write(tilt_angle)
         sleep(0.01)
-        fw_angle = 180 - pan_angle
+        fw_angle = 180 - tilt_angle
         if fw_angle < FW_ANGLE_MIN or fw_angle > FW_ANGLE_MAX:
             fw_angle = ((180 - fw_angle) - 90)/2 + 90
             if front_wheels_enable:
