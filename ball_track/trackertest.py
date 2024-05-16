@@ -98,7 +98,8 @@ def main():
 
         if cv2.waitKey(1) & 0xff == ord('q'):
             break
-        
+    
+    #press 'q', exits the while and stop 
     bw.stop()
     fw.turn(90)
     cv2.destroyAllWindows()
