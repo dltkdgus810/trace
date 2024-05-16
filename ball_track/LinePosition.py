@@ -2,24 +2,26 @@ import cv2
 import numpy as np
 
 #위치확인 함수
-def frame_set(contours,roi):
+def frame_set(contours, roi):
     if len(contours) > 0:
-        a = max(contours, key = cv2.contourArea)
+        a = max(contours, key=cv2.contourArea)
         M2 = cv2.moments(a)
-        if M2['m00']!=0:
-            x = int(M2['m10']/M2['m00'])
-            y = int(M2['m01']/M2['m00'])    
-            print("CX : "+str(x)+" CY : "+str(y))
-            if x >= 100:
+        if M2['m00'] != 0:
+            x = int(M2['m10'] / M2['m00'])
+            y = int(M2['m01'] / M2['m00'])
+            print("CX : " + str(x) + " CY : " + str(y))
+            if x >= 105:
                 print("Turn Left")
                 return x, y, -1
-            if x < 100 and x > 40:
-                print("On Track")
+            if 105 > x >= 55:
+                print("On Track (Center)")
                 return x, y, 0
-            if x <= 40:
+            if x < 55:
                 print("Turn Right")
                 return x, y, 1
-    return 0,0,0
+    return 0, 0, 0
+
+
 
 
 
@@ -34,14 +36,13 @@ if __name__ == "__main__":
     high_b = np.uint8([0,0,0])
     
     while True:
-        #카메라에서 한장면을 뽑아 frame에 저장한다.
         try:
-            ret, frame = capture.read()
+            _, frame = capture.read()
             #frame의 특정 위치의 장만면 저장한다.
-            roi2 = frame[360:480, 0:640]
-            roi3 = frame[240:360, 0:640]
-            roi4 = frame[120:240, 0:640]
-            roi5 = frame[0:120, 0:640]
+            roi2 = frame[90:120, 0:160]
+            roi3 = frame[60:90, 0:160]
+            roi4 = frame[30:60, 0:160]
+            roi5 = frame[0:30, 0:160]
         except Exception as e:
             print(e)
             continue
