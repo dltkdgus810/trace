@@ -84,17 +84,26 @@ def main():
             fw_angle = 120 # change plz
             if front_wheels_enable:
                  fw.turn(fw_angle)
+                 motor_speed = 30
         elif direction_flag == -1:
             fw_angle = 60 # change plz
             if front_wheels_enable:
                  fw.turn(fw_angle)
+                 motor_speed = 30
         else:
             fw_angle = 90 # change plz
-            if rear_wheels_enable:
-                bw.speed = motor_speed
-                bw.forward()
+            if front_wheels_enable:
+                fw.turn(fw_angle)
+                motor_speed = 60 
+                       
+        if motor_speed == 60:
+            bw.speed = motor_speed
+            bw.forward()
+        else:
+            bw.speed = motor_speed
+            bw.forward()
+            sleep(0.01)
                 
-        sleep(0.01)
 
         if cv2.waitKey(1) & 0xff == ord('q'):
             break
