@@ -10,13 +10,13 @@ def frame_set(contours, roi):
             x = int(M2['m10'] / M2['m00'])
             y = int(M2['m01'] / M2['m00'])
             print("CX : " + str(x) + " CY : " + str(y))
-            if x >= 105:
+            if x >= 101:
                 print("Turn Left")
                 return x, y, -1
-            if 105 > x >= 55:
+            if 101 > x >= 60:
                 print("On Track (Center)")
                 return x, y, 0
-            if x < 55:
+            if x < 60:
                 print("Turn Right")
                 return x, y, 1
     return 0, 0, 0
@@ -29,8 +29,8 @@ if __name__ == "__main__":
     #카메라 영상을 capture에 저장
     capture = cv2.VideoCapture(0)
     #저장한 영상의 화면 크기 설정
-    capture.set(cv2.CAP_PROP_FRAME_WIDTH,640)
-    capture.set(cv2.CAP_PROP_FRAME_HEIGHT,480)
+    capture.set(cv2.CAP_PROP_FRAME_WIDTH,160)
+    capture.set(cv2.CAP_PROP_FRAME_HEIGHT,120)
     #검출할 색 선정
     low_b = np.uint8([60,60,60])
     high_b = np.uint8([0,0,0])
