@@ -84,28 +84,27 @@ def main():
             fw_angle = 120 # change plz
             if front_wheels_enable:
                  fw.turn(fw_angle)
-                 motor_speed = 30
+                 bw.left_wheel.speed=30
+                 bw.right_wheel.speed=0
         elif direction_flag == -1:
             fw_angle = 60 # change plz
             if front_wheels_enable:
                  fw.turn(fw_angle)
-                 motor_speed = 30
+                 bw.left_wheel.speed=0
+                 bw.right_wheel.speed=30
         else:
             fw_angle = 90 # change plz
             if front_wheels_enable:
                 fw.turn(fw_angle)
-                motor_speed = 60 
+                bw.speed=30
                        
-        if motor_speed == 60:
-            bw.speed = motor_speed
-            bw.forward()
-        else:
-            bw.speed = motor_speed
-            bw.forward()
-            sleep(0.01)
+       
+        
+        bw.forward()
+    
                 
 
-        if cv2.waitKey(1) & 0xff == ord('q'):
+        if KeyboardInterrupt:
             break
     
     #press 'q', exits the while and stop 

@@ -10,13 +10,13 @@ def frame_set(contours, roi):
             x = int(M2['m10'] / M2['m00'])
             y = int(M2['m01'] / M2['m00'])
             print("CX : " + str(x) + " CY : " + str(y))
-            if x >= 101:
+            if x >= 105:
                 print("Turn Left")
                 return x, y, -1
-            if 101 > x >= 60:
+            if 105 > x >= 55:
                 print("On Track (Center)")
                 return x, y, 0
-            if x < 60:
+            if x < 55:
                 print("Turn Right")
                 return x, y, 1
     return 0, 0, 0
